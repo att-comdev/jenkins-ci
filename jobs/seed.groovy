@@ -32,13 +32,9 @@ job(job_name) {
         githubPush()
     }
     steps {
-        gradle 'clean test'
         dsl {
-            external 'jobs/**/*-job.groovy'
+            external 'jobs/*-job.groovy'
             additionalClasspath 'src/main/groovy'
         }
-    }
-    publishers {
-        archiveJunit 'build/test-results/**/*.xml'
     }
 }
