@@ -16,11 +16,11 @@ job(job_name) {
         stringParam('GIT_PROJECT', 'openstack-helm')
         stringParam('GIT_REPO', 'slfletch/openstack-helm-1')
         stringParam('GIT_URL', 'https://github.com/slfletch/openstack-helm-1.git')
+        stringParam('GIT_BRANCH', 'master')
         stringParam('SERVER_ID','ArtifactoryPro')
         stringParam('PATCH_VERSION', '0')
         stringParam('MINOR_VERSION', '1')
         stringParam('MAJOR_VERSION', '0')
-        stringParam('GIT_BRANCH', 'master')
         stringParam('HELM_VERSION', 'v2.3.1')
         stringParam('KUBE_VERSION', 'v1.6.2')
         stringParam('KUBEADM_IMAGE_VERSION', 'v1.6')
@@ -34,14 +34,16 @@ job(job_name) {
         scm 'H/30 * * * *'
     }
     steps {
-        shell("""
-                export WORK_DIR=\$(pwd)
-                export HOST_OS=\${ID}
+        shell(""" \
+            export WORK_DIR=\$(pwd)
+            export HOST_OS=\${ID}
+            export INTEGRATION=aio
+            export INTEGRATION_TYPE=notbasic
+            export PVC_BACKEND=ceph
+            ./tools/gate/setup_gate.sh
         """)
         dsl("""
-            println "Hello world!"
-            println "Hello world!"
-            println "Hello world!"
+            println "End!"
             print "ls".execute().text
         """)
     }

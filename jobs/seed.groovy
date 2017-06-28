@@ -25,6 +25,10 @@ listView(project) {
 }
 
 job(job_name) {
+    parameters {
+        stringParam('GIT_PROJECT', GIT_PROJECT)
+        stringParam('GIT_REPO', GIT_REPO)
+    }
     scm {
         github('att-comdev/jenkins-ci', 'master')
     }
@@ -33,7 +37,7 @@ job(job_name) {
     }
     steps {
         dsl {
-            external 'jobs/*-job.groovy'
+            external 'jobs/*_job.groovy'
             additionalClasspath 'src/main/groovy'
         }
     }
