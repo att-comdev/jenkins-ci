@@ -21,7 +21,7 @@ node('slave') {
         sh '''#!/bin/bash -xe
         sudo apt-get install -y python-pip libpython-all-dev libpython3-all-dev libffi-dev libssl-dev gcc git ntp tox ansible docker.io
         if ! id | grep -q docker; then
-            #sudo adduser $USER docker
+            sudo adduser $USER docker||:
         fi
         if [ -z "${COMPONENTS_LIST}" ];then
             echo "ERROR: COMPONENTS_LIST parameter is empty"
