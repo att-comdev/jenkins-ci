@@ -1,7 +1,9 @@
 // If you want, you can define your seed job in the DSL and create it via the REST API.
 // See https://github.com/sheehan/job-dsl-gradle-example#rest-api-runner
 
-def project = GIT_REPO + "-" + GIT_PROJECT
+def branch = GIT_BRANCH
+def project = GIT_REPO + "-" + GIT_PROJECT + "-" + branch
+
 def job_name = project +'/' + 'seed'
 
 folder(project){
@@ -26,11 +28,11 @@ listView(project) {
 
 job(job_name) {
     parameters {
-        stringParam('GIT_PROJECT', GIT_PROJECT)
-        stringParam('GIT_REPO', GIT_REPO)
+        stringParam('GIT_PROJECT', GIT_REPO + "/" + GIT_PROJECT)
+        stringParam('GIT_BRANCH', branch)
     }
     scm {
-        github('att-comdev/jenkins-ci', 'master')
+        github("\$GIT_PROJECT", "\$GIT_BRANCH")
     }
     triggers {
         githubPush()
