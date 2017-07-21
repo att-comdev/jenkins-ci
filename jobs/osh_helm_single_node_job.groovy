@@ -1,10 +1,8 @@
 import groovy.json.JsonSlurper
 
-def project = GIT_REPO + "-" + GIT_PROJECT
-def job_name = project +'/' + 'osh-helm-single-node'
+def job_name =  GIT_REPO + "-" + GIT_PROJECT + "-" + GIT_BRANCH +'/' + 'osh-helm-single-node'
 
 String repo = 'sheehan/grails-example'
-
 
 def contentsAPI = new URL("https://api.github.com/repos/${GIT_REPO}/${GIT_PROJECT}/contents")
 def repositoryContents = new groovy.json.JsonSlurper().parse(contentsAPI.newReader())

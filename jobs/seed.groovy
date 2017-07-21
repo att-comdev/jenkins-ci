@@ -28,11 +28,12 @@ listView(project) {
 
 job(job_name) {
     parameters {
-        stringParam('GIT_PROJECT', GIT_REPO + "/" + GIT_PROJECT)
+        stringParam('GIT_PROJECT', GIT_PROJECT)
+        stringParam('GIT_REPO', GIT_REPO)
         stringParam('GIT_BRANCH', branch)
     }
     scm {
-        github("\$GIT_PROJECT", "\$GIT_BRANCH")
+        github("\$GIT_REPO/\$GIT_PROJECT", "\$GIT_BRANCH")
     }
     triggers {
         githubPush()
