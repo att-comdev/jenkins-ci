@@ -31,6 +31,9 @@ job(job_name) {
         stringParam('GIT_PROJECT', GIT_PROJECT)
         stringParam('GIT_REPO', GIT_REPO)
         stringParam('GIT_BRANCH', branch)
+        stringParam('SLACK_TEAM', SLACK_TEAM)
+        stringParam('SLACK_TOKEN', SLACK_TOKEN)
+        stringParam('SLACK_ROOM', SLACK_ROOM)
     }
     scm {
         github("\$GIT_REPO/\$GIT_PROJECT", "\$GIT_BRANCH")
