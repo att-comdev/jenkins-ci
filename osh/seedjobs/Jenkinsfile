@@ -114,6 +114,7 @@ node('slave') {
 
     stage('Results') {
         sh '''#!/bin/bash -xe
+        echo SUCCESS
         '''
     }
 
